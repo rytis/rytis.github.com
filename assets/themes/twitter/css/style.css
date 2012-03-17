@@ -1,15 +1,26 @@
 /* Override some defaults */
 html, body {
   background-color: #eee;
+  position: relative;
+  padding-top: 20px;
+  margin: 0;
 }
+
 .navbar {
   margin-bottom: 0;
 }
+
 .container > footer {
   margin-top: 20px;
 }
 .container > footer p {
   text-align: center; /* center align it with the container */
+}
+
+blockquote {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-style: italic;
 }
 
 /* The white background content wrapper */
