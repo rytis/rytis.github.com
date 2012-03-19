@@ -23,7 +23,6 @@ from fabric.api import run, env
 import requests
 import json
 import yaml
-import pprint
 
 # couple of node management tasks
 
@@ -38,7 +37,7 @@ def puppet(command='status'):
     run("service puppet %s" % command)
 
 def hadoop(command='status'):
-    """Manage Hadoop services. 
+    """Manage Hadoop services.
 
     Available parameters: `command', default: `status'
 
@@ -74,11 +73,14 @@ if __name__ != '__main__':
     if 'selector' in env:
         key, val = env.selector.split(':')
         env.hosts += _get_host_list(key, val)
-{% endhiglight %}
+
+
+{% endhighlight %}
 
 Now you can specify any host parameter name / value pair, and run any Fabric command on the resulting list of nodes:
 
 {% highlight bash %}
+
 # fab --set selector='hadoop_node_role:slave' puppet
 [hadoop-slave-1.domain] Executing task 'puppet'
 [hadoop-slave-1.domain] run: service puppet status
@@ -102,5 +104,8 @@ Disconnecting from hadoop-slave-1.domain... done.
 Disconnecting from hadoop-slave-2.domain... done.
 Disconnecting from hadoop-slave-3.domain... done.
 Disconnecting from hadoop-slave-4.domain... done.
+
 {% endhighlight %}
+
+The trick here is that we create a new Fabric environment setting (called `selector`) from a command line. The value of this parameter is set to host parameter name/value separated by colon `:` character. In the fabfile we first check if user has specified the additional parameter, `selector`, and if it is specified, we use its value to filter out nodes from the list that Foreman API returns to us.
 
