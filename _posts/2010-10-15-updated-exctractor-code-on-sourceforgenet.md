@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Updated Exctractor code on sourceforge.net"
-category: exctractor
-tags: [documentation, python, regexp]
+category: programming
+tags: [documentation, regexp]
 ---
 {% include JB/setup %}
 

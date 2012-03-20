@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Testing TCP connections"
-category: Programming, System Administration
+category: sysadmin
 tags: [python, networking]
 ---
 {% include JB/setup %}
@@ -9,6 +9,7 @@ tags: [python, networking]
 Here's a quick snippet of python code that attempts to establish a TCP connection and reports whether it was successful or not. Netcat is a lot better suited for this role, but sometimes you may not be able to install it. In these situations this little script can come in handy:
 
 {% highlight python %}
+
 #!/usr/bin/env python
  
 import socket
@@ -28,4 +29,5 @@ while True:
         s.close()
     except:
         print "[%s] Cannot connect" % time.strftime("%H:%M:%S")
+
 {% endhighlight%}

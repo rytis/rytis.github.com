@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python - language of the year"
-category: News
+category: news
 tags: [python]
 ---
 {% include JB/setup %}

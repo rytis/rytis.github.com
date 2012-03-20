@@ -6,7 +6,7 @@ tags: [httplib, python, web]
 ---
 {% include JB/setup %}
 
-I’ve come across a question on [Python-Forum.org](http://www.python-forum.org/pythonforum/viewtopic.php?f=5&p=94135) where someone was asking how to check whether a web page exists from a Python script. Something similar to what the `wget --spider` option does. Interestingly enough, the question stood there unanswered for nearly two months.
+I've come across a question on [Python-Forum.org](http://www.python-forum.org/pythonforum/viewtopic.php?f=5&p=94135) where someone was asking how to check whether a web page exists from a Python script. Something similar to what the `wget --spider` option does. Interestingly enough, the question stood there unanswered for nearly two months.
 
 The solution is very simple and trivial however. Let’s have a look at what exactly the --spider option is supposed to do. This is what the wget manual page says:
 
@@ -23,6 +23,7 @@ So, all we have to do is use the HTTP `HEAD` method when we request the page. Th
 This is quite easy to do with a simple httplib call:
 
 {% highlight python %}
+
 >>> import httplib
 >>> conn = httplib.HTTPConnection('www.w3.org')
 >>> conn.request('HEAD', '/Protocols/rfc2616/rfc2616-sec9.html')
@@ -54,10 +55,11 @@ This is quite easy to do with a simple httplib call:
 >>> resp.status
 200
 >>>
+
 {% endhighlight %}
 
 
-As you can see there’s a fair amount of useful information returned. Apart from the obvious "the page exists" / "the page doesn't exist" (or HTTP status `200` and `404` respectively), you can figure out the size of the requested web page, its last modification date, etc.
+As you can see there is a fair amount of useful information returned. Apart from the obvious "the page exists" / "the page doesn't exist" (or HTTP status `200` and `404` respectively), you can figure out the size of the requested web page, its last modification date, etc.
 
-This method is useful if you need to check whether the page has changed since you last checked. So you don’t have to download the whole thing every time, just to discover that there were no changes.
+This method is useful if you need to check whether the page has changed since you last checked. So you don't have to download the whole thing every time, just to discover that there were no changes.
 

@@ -19,6 +19,7 @@ So let's assume that for each node in your Hadoop cluster you set `hadoop_node_r
 Let's create a `fabfile.py` that will query Foreman to get a list of all nodes, and then filter out only those that meet a specified selector rule:
 
 {% highlight python %}
+
 from fabric.api import run, env
 import requests
 import json
