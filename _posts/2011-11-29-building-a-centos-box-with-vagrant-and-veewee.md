@@ -8,14 +8,14 @@ tags: [vagrant]
 
 This is more of a quick checklist for building a CentOS box with Vagrant and VeeWee than a real blog post.
 
-== Prerequisites
+### Prerequisites
 
 - Oracle VirtualBox installed
 - Vagrant installed (`sudo gem install vagrant`)
 - VeeWee installed (`sudo gem install veewee`)
 - CentOS 6.0 i386 DVD ISO downloaded from one of the mirrors listed in <http://isoredirect.centos.org/centos/6/isos/i386/>
 
-== Building a CentOS box
+### Building a CentOS box
 
 - Create working directories and copy the ISO image
 
@@ -69,7 +69,7 @@ $ vagrant box add centos60 centos60.box
 
 {% endhighlight %}
 
-== Using your new box
+### Using your new box
 
 To spin off a new instance, run the usual Vagrant commands:
 
