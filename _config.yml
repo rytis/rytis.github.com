@@ -10,7 +10,7 @@ pygments: true
 # so be sure to set them if your theme uses them.
 #
 title : SysAdminPy
-tagline: Python powered system administration
+tagline: Professional System Administration with Python
 author :
   name : Rytis Sileika
   email : rytis.sileika@gmail.com

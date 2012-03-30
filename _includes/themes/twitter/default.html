@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    {% if page.title %}
     <title>{{ page.title }}</title>
+    {% else %}
+    <title>{{ site.tagline }} | {{ site.title }}</title>
+    {% endif %}
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
 
