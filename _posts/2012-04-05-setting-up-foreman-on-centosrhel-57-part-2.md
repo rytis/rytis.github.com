@@ -120,9 +120,7 @@ The configuration is very similar to Puppet configuration. Assuming that you are
 
 {% endhighlight %}
 
-<div class="alert alert-info">
-<h4 class="alert-heading">Note!</h4> Make sure you point to the existing certificate and certificate key files. We created those in the previous post, while installing and setting up Puppet server.
-</div>
+**Note!** Make sure you point to the existing certificate and certificate key files. We created those in the previous post, while installing and setting up Puppet server.
 
 ## Integrate Puppet and Foreman
 
