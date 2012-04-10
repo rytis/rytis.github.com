@@ -6,7 +6,7 @@ tags: [foreman, puppet]
 ---
 {% include JB/setup %}
 
-In the previous article we installed and configured Puppet. We have also set up puppet to write host configuration data to a PostgreSQL database using storedconfig.
+In the [previous article](../../../03/21/setting-up-foreman-on-centosrhel-57-part-1/) we installed and configured Puppet. We have also set up puppet to write host configuration data to a PostgreSQL database using storedconfig.
 
 Today, I'm going to show you how to install and configure:
 
@@ -90,7 +90,7 @@ Now that we have a running Foreman instance, try connecting to it (http://your-f
 
 ## Configure Passenger
 
-It is OK to use default WEBrick web server for quick tests, but you don't really want to do that in the production environment. So just as we did with Puppet, let's run Foreman from withing Passenger.
+It is OK to use default WEBrick web server for quick tests, but you don't really want to do that in the production environment. So just as we did with Puppet, let's run Foreman from within Passenger.
 
 The configuration is very similar to Puppet configuration. Assuming that you are using Apache, create `/etc/httpd/conf.d/foreman.conf` with the following contents:
 
@@ -109,8 +109,8 @@ The configuration is very similar to Puppet configuration. Assuming that you are
 
     # Use puppet certificates for SSL
     SSLEngine On
-    SSLCertificateFile /var/lib/puppet/ssl/certs/chidatapp666.bskyb.com.pem
-    SSLCertificateKeyFile /var/lib/puppet/ssl/private_keys/chidatapp666.bskyb.com.pem
+    SSLCertificateFile /var/lib/puppet/ssl/certs/__your_servername__.pem
+    SSLCertificateKeyFile /var/lib/puppet/ssl/private_keys/__your_servername__.pem
     SSLCertificateChainFile /var/lib/puppet/ssl/ca/ca_crt.pem
     SSLCACertificateFile /var/lib/puppet/ssl/ca/ca_crt.pem
     SSLVerifyClient optional
@@ -119,6 +119,10 @@ The configuration is very similar to Puppet configuration. Assuming that you are
 </VirtualHost>
 
 {% endhighlight %}
+
+<div class="alert alert-info">
+<h4 class="alert-heading">Note!</h4> Make sure you point to the existing certificate and certificate key files. We created those in the previous post, while installing and setting up Puppet server.
+</div>
 
 ## Integrate Puppet and Foreman
 
@@ -130,7 +134,7 @@ Once a Puppet client finishes its run, it will report back to Puppet master with
 
 The source of this script can be found on [Foreman Github repository](https://raw.github.com/theforeman/puppet-foreman/master/templates/foreman-report.rb.erb), so check for an updated version.
 
-Add the following code the a file called `/usr/lib/ruby/site_ruby/1.8/puppet/reports/foreman.rb`. You will have to create this file, as it wouldn't exist:
+Add the following code to a file called `/usr/lib/ruby/site_ruby/1.8/puppet/reports/foreman.rb`. You will have to create this file, as it wouldn't exist:
 
 {% highlight ruby %}
 
@@ -223,7 +227,7 @@ Next step is to tell Puppet what script it needs to call when it needs to get in
 
 # Install Foreman Proxy (smart-proxy)
 
-So we have a running and configured instance of Foreman, but the system is not ready yet for host provisioning. Most of the operation that Foreman performs, like adding hosts to DHCP, creating PXEboot files and managing DNS, are done using **smart-proxy** components, also refered to as **foreman-proxy**. I'll use these terms interchangeably.
+So we have a running and configured instance of Foreman, but the system is not ready yet for host provisioning. Most of the operation that Foreman performs, like adding hosts to DHCP, creating PXEboot files and managing DNS, are done using **smart-proxy** components, also referred to as **foreman-proxy**. I'll use these terms interchangeably.
 
 Installing the latest Foreman-Proxy code is very simple, just follow the steps below:
 
@@ -243,7 +247,7 @@ $ /opt/smart-proxy/bin/smart-proxy
 
 {% endhighlight %}
 
-You should have a working smart-proxy, albeit without any capabilities. You can test it with your browser by going to http://__your_host__:8443/features. You should see an empty 'Suported features' list.
+You should have a working smart-proxy, albeit without any capabilities. You can test it with your browser by going to [http://__your_host__:8443/features](http://__your_host__:8443/features) URL. You should see an empty 'Supported features' list.
 
 In this example I'm starting smart proxy directly running the script. Although it does 'daemonise' itself properly, you might want to create a proper `init.d` script.
 
@@ -274,7 +278,7 @@ You also need to tell smart proxy that it is supposed to manage Puppet by making
 
 ## Adding support for TFTP and DHCP management
 
-You aobviously can separate TFTP and DHCP services, but they typically are not resource hungry and because they are both involved in PXE boot process it makes sense to run these two services on the same host. So I will deal with their configuration in one section.
+Obviously, you can separate TFTP and DHCP services, but they typically are not resource hungry and because they are both involved in PXE boot process it makes sense to run these two services on the same host. So I will deal with their configuration in one section.
 
 ### TFTP configuration
 
@@ -307,10 +311,167 @@ Finally, tell Foreman Proxy that it is now in charge for TFTP management by chan
 
 ### Add DHCP support
 
-Blah
+The steps needed to get DHCP working and controlled by the smart-proxy are:
+
+- Generate shared key for DHCP management via OMAPI protocol
+- Create DHCP configuration that allows remote subnet management
+- Enable DHCP support in smart-proxy configuration and provide the key details
+
+Let's install some required packages, including a Ruby Gem:
+
+{% highlight bash %}
+
+# yum install -y libffi libffi-devel bind
+# gem install net-ping
+
+{% endhighlight %}
+
+Generate a key (this will create a couple of files, you can delete them):
+
+{% highlight bash %}
+
+# dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST omapi_key
+# cat Komapi_key.+*.private |grep ^Key|cut -d ' ' -f2-
+[..key..]
+
+{% endhighlight %}
  
+Create a DHCP configuration filei `/etc/dhcpd.conf`. Make sure you put the details representing your network configuration, ie subnet, netmask, router IPs, etc:
+
+{% highlight bash %}
+
+omapi-port 7911;
+key omapi_key {
+  algorithm HMAC-MD5;
+  secret "[..key..]";
+};
+omapi-key omapi_key;
+
+allow booting;
+allow bootp;
+
+subnet 192.168.0.0 netmask 255.255.255.0 {
+    range 192.168.0.100 192.168.0.200;
+    option domain-name-servers 192.168.0.1;
+    option domain-name "my.domain";
+    option routers 192.168.0.254;
+    filename "/pxelinux.0";
+    next-server 192.168.0.10;
+}
+
+{% endhighlight %}
+
+And finally, tell smart-proxy that it now manages DHCP daemon (in `/opt/smart-proxy/config/settings.yml`):
+
+{% highlight bash %}
+
+:dhcp: true
+:dhcp_vendor: isc
+:dhcp_config: /etc/dhcpd.conf
+:dhcp_leases: /var/lib/dhcpd/dhcpd.leases
+:dhcp_key_name: omapi_key
+:dhcp_key_secret: [..key..]
+
+{% endhighlight %}
+
+Restart the foreman-proxy process, and you should see DHCP enabled if you go to [http://__your_host__:8443/features](http://__your_host__:8443/features).
+
+### Add DNS support (Bind)
+
+Now, when you add a new host, Foreman will contact the smart-proxy and do two things: firstly it will get the next available IP, which will be suggested for you. Secondly, when you click on **save** button, it will instruct smart-proxy to add the IP to DHCP leases file.
+
+Let's go even further, and use smart-proxy to create an entry in DNS zone file.
+
+The process is very similar to DHCP configuration:
+
+- Generate a secret key which is shared between smart-proxy and DNS server
+- Instruct DNS server to allow remote management
+- Configure smart-proxy by telling it that it is now responsible for DNS management
+
+Install Bind and configure it (you will have to refer to Bind configuration guide for the exact details):
+
+{% highlight bash %}
+
+# yum install -y bind bind-utils bind-chroot bind-libs
+
+{% endhighlight %}
+
+Create shared keys. Unlike with DHCP, you will have to keep the generated files in the directories they were created. I'm also showing what the result files may look like:
+
+{% highlight bash %}
+
+# cd /var/named/chroot/etc
+# dnssec-keygen -a HMAC-MD5 -b 128 -n HOST foreman
+
+# cat Kforeman.+157+51238.key
+foreman. IN KEY 512 3 157 [..key..]
+# cat Kforeman.+157+51238.private
+Private-key-format: v1.2
+Algorithm: 157 (HMAC_MD5)
+Key: [..key..]
+
+{% endhighlight %}
+
+Create a new DNS key file (called `/var/named/chroot/etc/foreman.key`), which will be included in the main configuration:
+
+{% highlight bash %}
+
+key "foreman" {
+        algorithm hmac-md5;
+        secret "[..key..]";
+};
+
+{% endhighlight %}
+
+Make it readable by the foreman user:
+
+{% highlight bash %}
+
+# chmod o+r /var/named/chroot/etc/foreman.key
+
+{% endhighlight %}
+
+Modify DNS zone configuration (`/var/named/chroot/etc/named.conf`), so that remote management is allowed:
+
+{% highlight bash %}
+
+include "/etc/foreman.key";
+zone "0.168.192.in-addr.arpa." IN {
+        type master;
+        file "192.168.0.db";
+        allow-update { key "foreman"; };
+};
+
+zone "my.domain." IN {
+        type master;
+        file "my.domain.db";
+        allow-update { key foreman; };
+};
+
+{% endhighlight %}
+
+And tell Foreman-proxy to manage DNS by modifying `/opt/smart-proxy/config/settings.yml`:
+
+{% highlight bash %}
+
+:dns: true
+:dns_key: /var/named/chroot/etc/Kforeman.+157+51238.private
+
+{% endhighlight %}
+
+Restart the foreman-proxy process and test if you can create a new node.
 
 # Troubleshooting
+
+As you can see, the installation process although pretty straight forward, but has a lot of steps. So there are a lot of points where things could go wrong. But fear not, it's not that difficult and scary as it may seem at first.
+
+Some of the things to look at if things do not work the first time:
+
+- Gem file permissions. Some systems have very restrictive umask settings, and all gems installed by `root` user will not be available to other users (`foreman`, `puppet`, `foreman-proxy`). Check files in `/usr/lib/ruby/site_ruby/1.8/`.
+- Other file permissions. Check that other users that are involved in the process can read (and write where appropriate) all required files, in particular: `/tftpboot/*`, `/var/named/chroot/etc/*`, `/etc/dhcpd.conf`, and `/var/lib/dhcpd/dhcpd.leases`.
+- When you make any changes, don't forget to restart all processes that are involved: `httpd`, smart-proxy, `dhcpd`, `named`.
+
+If still stuck, hop on to `#theforeman` IRC channel on freenode.net, the bunch there is really friendly and helpful (I know, I've been asking a lot of stupid questions, and they still tolerate me :) )
 
 # Further reading
 
