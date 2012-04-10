@@ -418,5 +418,5 @@ If any of the versions are different, uninstall them, and install the correct on
 Once you're done, please check the permissions, as described in the previous Troubleshooting sections.
 
 ---
-[Part 2 of this series is already available](../../../04/05/setting-up-foreman-on-centosrhel-57-part-2/)
+[Part 2 of this series is already available](/sysadmin/2012/04/05/setting-up-foreman-on-centosrhel-57-part-2/)
 

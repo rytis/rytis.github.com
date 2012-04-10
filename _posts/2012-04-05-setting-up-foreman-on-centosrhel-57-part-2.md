@@ -6,7 +6,7 @@ tags: [foreman, puppet]
 ---
 {% include JB/setup %}
 
-In the [previous article](../../../03/21/setting-up-foreman-on-centosrhel-57-part-1/) we installed and configured Puppet. We have also set up puppet to write host configuration data to a PostgreSQL database using storedconfig.
+In the [previous article](/sysadmin/2012/03/21/setting-up-foreman-on-centosrhel-57-part-1/) we installed and configured Puppet. We have also set up puppet to write host configuration data to a PostgreSQL database using storedconfig.
 
 Today, I'm going to show you how to install and configure:
 
