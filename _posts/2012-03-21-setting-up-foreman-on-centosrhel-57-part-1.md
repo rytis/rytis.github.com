@@ -421,25 +421,30 @@ Once you're done, please check the permissions, as described in the previous Tro
 
 Below is a list of already built RPMs for RHEL5.7 x86_64 platform. They were built as described above, so to the best of my knowledge, they should not contain any nasty stuff in them. :)
 
-- Ruby 1.8.7-352 RPMs for RHEL5.7 x86_64
-    - [ruby-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-1.8.7.352-5.x86_64.rpm)
-    - [ruby-debuginfo-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-debuginfo-1.8.7.352-5.x86_64.rpm)
-    - [ruby-devel-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-devel-1.8.7.352-5.x86_64.rpm)
-    - [ruby-irb-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-irb-1.8.7.352-5.x86_64.rpm)
-    - [ruby-libs-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-libs-1.8.7.352-5.x86_64.rpm)
-    - [ruby-rdoc-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-rdoc-1.8.7.352-5.x86_64.rpm)
-    - [ruby-ri-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-ri-1.8.7.352-5.x86_64.rpm)
-    - [ruby-static-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-static-1.8.7.352-5.x86_64.rpm)
-- RubyGems 1.8.10-1 RPM for RHEL5.7 x86_64
-    - [rubygems-1.8.10-1.noarch.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/rubygems-RHEL5-x86_64/rubygems-1.8.10-1.noarch.rpm)
-- Passenger 3.0.11-9 RPMs for RHEL5.7 x86_64
-    - [mod_passenger-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/mod_passenger-3.0.11-9.x86_64.rpm)
-    - [nginx-passenger-1.0.11-3.0.11_9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/nginx-passenger-1.0.11-3.0.11_9.x86_64.rpm)
-    - [passenger-standalone-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/passenger-standalone-3.0.11-9.x86_64.rpm)
-    - [rubygem-daemon_controller-0.2.5-1.noarch.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-daemon_controller-0.2.5-1.noarch.rpm)
-    - [rubygem-passenger-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-3.0.11-9.x86_64.rpm)
-    - [rubygem-passenger-native-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-native-3.0.11-9.x86_64.rpm)
-    - [rubygem-passenger-native-libs-3.0.11-9_1.8.7.352.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-native-libs-3.0.11-9_1.8.7.352.x86_64.rpm)
+## Ruby 1.8.7-352 RPMs for RHEL5.7 x86_64
+
+- [ruby-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-1.8.7.352-5.x86_64.rpm)
+- [ruby-debuginfo-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-debuginfo-1.8.7.352-5.x86_64.rpm)
+- [ruby-devel-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-devel-1.8.7.352-5.x86_64.rpm)
+- [ruby-irb-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-irb-1.8.7.352-5.x86_64.rpm)
+- [ruby-libs-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-libs-1.8.7.352-5.x86_64.rpm)
+- [ruby-rdoc-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-rdoc-1.8.7.352-5.x86_64.rpm)
+- [ruby-ri-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-ri-1.8.7.352-5.x86_64.rpm)
+- [ruby-static-1.8.7.352-5.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/ruby-RHEL5-x86_64/ruby-static-1.8.7.352-5.x86_64.rpm)
+
+## RubyGems 1.8.10-1 RPM for RHEL5.7 x86_64
+
+- [rubygems-1.8.10-1.noarch.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/rubygems-RHEL5-x86_64/rubygems-1.8.10-1.noarch.rpm)
+
+## Passenger 3.0.11-9 RPMs for RHEL5.7 x86_64
+
+- [mod_passenger-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/mod_passenger-3.0.11-9.x86_64.rpm)
+- [nginx-passenger-1.0.11-3.0.11_9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/nginx-passenger-1.0.11-3.0.11_9.x86_64.rpm)
+- [passenger-standalone-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/passenger-standalone-3.0.11-9.x86_64.rpm)
+- [rubygem-daemon_controller-0.2.5-1.noarch.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-daemon_controller-0.2.5-1.noarch.rpm)
+- [rubygem-passenger-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-3.0.11-9.x86_64.rpm)
+- [rubygem-passenger-native-3.0.11-9.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-native-3.0.11-9.x86_64.rpm)
+- [rubygem-passenger-native-libs-3.0.11-9_1.8.7.352.x86_64.rpm](https://s3.amazonaws.com/sysadminpy/RPMs/passenger-RHEL5-x86_64/rubygem-passenger-native-libs-3.0.11-9_1.8.7.352.x86_64.rpm)
 
 ---
 [Part 2 of this series is already available](/sysadmin/2012/04/05/setting-up-foreman-on-centosrhel-57-part-2/)
