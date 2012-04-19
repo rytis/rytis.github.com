@@ -241,6 +241,8 @@ Installing the latest Foreman-Proxy code is very simple, just follow the steps b
 # chown -R foreman-proxy smart-proxy
 # chown -R foreman-proxy.root /var/log/foreman-proxy
 # gem install sinatra -v 1.0
+# gem install json
+# cp /opt/smart-proxy/config/settings.yml.example /opt/smart-proxy/config/settings.yml
 # mkdir /var/run/foreman-proxy/
 # su - foreman-proxy
 $ /opt/smart-proxy/bin/smart-proxy
