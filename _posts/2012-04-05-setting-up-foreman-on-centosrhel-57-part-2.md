@@ -41,10 +41,11 @@ Alternatively, if you're using CentOS or do not have access to RHN for some reas
 
 {% highlight bash %}
 
-# rpm -ihv http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/xen-libs-3.0.3-135.el5.x86_64.rpm
-# rpm -ihv http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/xen-devel-3.0.3-135.el5.x86_64.rpm
-# rpm -ihv http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/libvirt-0.8.2-25.el5.x86_64.rpm
-# rpm -ihv http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/libvirt-devel-0.8.2-25.el5.x86_64.rpm
+# wget http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/xen-libs-3.0.3-135.el5.x86_64.rpm
+# wget http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/xen-devel-3.0.3-135.el5.x86_64.rpm
+# wget http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/libvirt-0.8.2-25.el5.x86_64.rpm
+# wget http://mirror.centos.org/centos-5/5/os/x86_64/CentOS/libvirt-devel-0.8.2-25.el5.x86_64.rpm
+# yum install *rpm --nogpgcheck
 
 {% endhighlight %}
 
@@ -70,6 +71,7 @@ For testing purposes you might want to leave SQLite, and remove the other two da
 {% highlight bash %}
 
 # cd foreman
+# yum install libxml2 libxml2-devel libxslt libxslt-devel
 # bundle install --without mysql sqlite test development --path vendor
 # cp config/settings.yaml.example config/settings.yaml
 
